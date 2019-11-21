@@ -4,7 +4,7 @@
 #
 Name     : perl-File-HomeDir
 Version  : 1.004
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/R/RE/REHSACK/File-HomeDir-1.004.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RE/REHSACK/File-HomeDir-1.004.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-homedir-perl/libfile-homedir-perl_1.004-1.debian.tar.xz
@@ -12,6 +12,8 @@ Summary  : 'Find your home and other directories on any platform'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0 GPL-2.0
 Requires: perl-File-HomeDir-license = %{version}-%{release}
+Requires: perl-File-HomeDir-perl = %{version}-%{release}
+Requires: perl(File::Which)
 BuildRequires : buildreq-cpan
 BuildRequires : perl(File::Which)
 
@@ -24,6 +26,7 @@ File::HomeDir - Find your home and other directories on any platform
 Summary: dev components for the perl-File-HomeDir package.
 Group: Development
 Provides: perl-File-HomeDir-devel = %{version}-%{release}
+Requires: perl-File-HomeDir = %{version}-%{release}
 
 %description dev
 dev components for the perl-File-HomeDir package.
@@ -37,18 +40,28 @@ Group: Default
 license components for the perl-File-HomeDir package.
 
 
+%package perl
+Summary: perl components for the perl-File-HomeDir package.
+Group: Default
+Requires: perl-File-HomeDir = %{version}-%{release}
+
+%description perl
+perl components for the perl-File-HomeDir package.
+
+
 %prep
 %setup -q -n File-HomeDir-1.004
-cd ..
-%setup -q -T -D -n File-HomeDir-1.004 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libfile-homedir-perl_1.004-1.debian.tar.xz
+cd %{_builddir}/File-HomeDir-1.004
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-HomeDir-1.004/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/File-HomeDir-1.004/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -58,7 +71,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -67,8 +80,8 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-HomeDir
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-File-HomeDir/LICENSE
-cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-HomeDir/deblicense_copyright
+cp %{_builddir}/File-HomeDir-1.004/LICENSE %{buildroot}/usr/share/package-licenses/perl-File-HomeDir/ef51e850423393335a21c5069af73674cdf6753f
+cp %{_builddir}/File-HomeDir-1.004/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-HomeDir/7d1705b93e8bd056cd774e3956c8abf6ba0dfa79
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -81,16 +94,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir.pm
-/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Darwin.pm
-/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Darwin/Carbon.pm
-/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Darwin/Cocoa.pm
-/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Driver.pm
-/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/FreeDesktop.pm
-/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/MacOS9.pm
-/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Test.pm
-/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Unix.pm
-/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Windows.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -107,5 +110,18 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-File-HomeDir/LICENSE
-/usr/share/package-licenses/perl-File-HomeDir/deblicense_copyright
+/usr/share/package-licenses/perl-File-HomeDir/7d1705b93e8bd056cd774e3956c8abf6ba0dfa79
+/usr/share/package-licenses/perl-File-HomeDir/ef51e850423393335a21c5069af73674cdf6753f
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir.pm
+/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Darwin.pm
+/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Darwin/Carbon.pm
+/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Darwin/Cocoa.pm
+/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Driver.pm
+/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/FreeDesktop.pm
+/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/MacOS9.pm
+/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Test.pm
+/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Unix.pm
+/usr/lib/perl5/vendor_perl/5.28.2/File/HomeDir/Windows.pm
