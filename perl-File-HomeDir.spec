@@ -4,7 +4,7 @@
 #
 Name     : perl-File-HomeDir
 Version  : 1.004
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/R/RE/REHSACK/File-HomeDir-1.004.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RE/REHSACK/File-HomeDir-1.004.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-homedir-perl/libfile-homedir-perl_1.004-1.debian.tar.xz
@@ -81,7 +81,7 @@ make TEST_VERBOSE=1 test
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-HomeDir
 cp %{_builddir}/File-HomeDir-1.004/LICENSE %{buildroot}/usr/share/package-licenses/perl-File-HomeDir/ef51e850423393335a21c5069af73674cdf6753f
-cp %{_builddir}/File-HomeDir-1.004/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-HomeDir/7d1705b93e8bd056cd774e3956c8abf6ba0dfa79
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-File-HomeDir/7d1705b93e8bd056cd774e3956c8abf6ba0dfa79
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -115,13 +115,13 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/File/HomeDir.pm
-/usr/lib/perl5/vendor_perl/5.30.1/File/HomeDir/Darwin.pm
-/usr/lib/perl5/vendor_perl/5.30.1/File/HomeDir/Darwin/Carbon.pm
-/usr/lib/perl5/vendor_perl/5.30.1/File/HomeDir/Darwin/Cocoa.pm
-/usr/lib/perl5/vendor_perl/5.30.1/File/HomeDir/Driver.pm
-/usr/lib/perl5/vendor_perl/5.30.1/File/HomeDir/FreeDesktop.pm
-/usr/lib/perl5/vendor_perl/5.30.1/File/HomeDir/MacOS9.pm
-/usr/lib/perl5/vendor_perl/5.30.1/File/HomeDir/Test.pm
-/usr/lib/perl5/vendor_perl/5.30.1/File/HomeDir/Unix.pm
-/usr/lib/perl5/vendor_perl/5.30.1/File/HomeDir/Windows.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/HomeDir.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/HomeDir/Darwin.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/HomeDir/Darwin/Carbon.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/HomeDir/Darwin/Cocoa.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/HomeDir/Driver.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/HomeDir/FreeDesktop.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/HomeDir/MacOS9.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/HomeDir/Test.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/HomeDir/Unix.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/HomeDir/Windows.pm
