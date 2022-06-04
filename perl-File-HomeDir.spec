@@ -4,7 +4,7 @@
 #
 Name     : perl-File-HomeDir
 Version  : 1.006
-Release  : 22
+Release  : 23
 URL      : https://cpan.metacpan.org/authors/id/R/RE/REHSACK/File-HomeDir-1.006.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RE/REHSACK/File-HomeDir-1.006.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-homedir-perl/libfile-homedir-perl_1.004-1.debian.tar.xz
@@ -115,13 +115,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/File/HomeDir.pm
-/usr/lib/perl5/vendor_perl/5.34.0/File/HomeDir/Darwin.pm
-/usr/lib/perl5/vendor_perl/5.34.0/File/HomeDir/Darwin/Carbon.pm
-/usr/lib/perl5/vendor_perl/5.34.0/File/HomeDir/Darwin/Cocoa.pm
-/usr/lib/perl5/vendor_perl/5.34.0/File/HomeDir/Driver.pm
-/usr/lib/perl5/vendor_perl/5.34.0/File/HomeDir/FreeDesktop.pm
-/usr/lib/perl5/vendor_perl/5.34.0/File/HomeDir/MacOS9.pm
-/usr/lib/perl5/vendor_perl/5.34.0/File/HomeDir/Test.pm
-/usr/lib/perl5/vendor_perl/5.34.0/File/HomeDir/Unix.pm
-/usr/lib/perl5/vendor_perl/5.34.0/File/HomeDir/Windows.pm
+/usr/lib/perl5/*
